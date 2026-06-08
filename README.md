@@ -2,11 +2,19 @@
 
 一套"思考前置 + 表达校准 + 推理优化 + 代码优化 + 记忆强化"的提示词协议。
 
-- **目标模型**：DeepSeek-V4-Pro、Xiaomi-MiMo-V2.5-Pro
+- **目标模型**：DeepSeek-V4-Pro、Xiaomi-MiMo-V2.5-Pro，及通义千问 / 智谱 GLM / Kimi / 豆包 / 文心 / 混元等[国产大模型](./references/supported-models.md)
 - **支持宿主**：Claude Code · Codex · Cursor · Windsurf · Cline / Roo Code · 通用 IDE / CLI
 - **核心理念**：先读懂人话，再围绕真实目标思考，输出更聪明、更严谨、更可执行的结果。
 
-> 📦 **安装**：完整多 IDE 安装指南见 **[INSTALL.md](./INSTALL.md)**（重点支持 Codex 与 Claude Code）。
+> 📦 **一键安装**（macOS / Linux）：
+> ```bash
+> curl -fsSL https://raw.githubusercontent.com/Hhz0823/DS-MIMO-Optimisation-SKILL/main/install.sh | bash
+> ```
+> **一键安装**（Windows PowerShell）：
+> ```powershell
+> irm https://raw.githubusercontent.com/Hhz0823/DS-MIMO-Optimisation-SKILL/main/install.ps1 | iex
+> ```
+> 完整多 IDE 安装指南见 **[INSTALL.md](./INSTALL.md)**（重点支持 Codex 与 Claude Code）。
 
 ## 它能做什么
 
@@ -32,6 +40,9 @@
 cognition-booster/   (文件夹，即本 skill；当前名为 skill-1)
 ├── SKILL.md         # 主入口，总流程与各协议摘要
 ├── README.md        # 本文件
+├── INSTALL.md       # 多 IDE 安装指南
+├── install.sh       # 一键安装脚本（macOS / Linux）
+├── install.ps1      # 一键安装脚本（Windows）
 └── references/
     ├── dialogue-optimization.md   # 对话与表达优化 + 对话深度理解
     ├── chinese-comprehension.md   # 中文深度理解（倒装/成语/省略/网络语）
@@ -40,7 +51,8 @@ cognition-booster/   (文件夹，即本 skill；当前名为 skill-1)
     ├── coding-optimization.md     # 代码编程优化
     ├── context-memory.md          # 上下文压缩与记忆强化
     ├── efficiency-optimization.md # 效率优化（缓存命中率/上下文使用率）
-    └── installation.md            # 安装指南（Claude Code / Codex）
+    ├── supported-models.md        # 支持的模型（含国产大模型清单）
+    └── installation.md            # 简版安装说明
 ```
 
 ## 快速开始

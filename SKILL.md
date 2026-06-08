@@ -9,10 +9,22 @@ description: >-
   当需要让模型"更听得懂人话"、推理更严谨、目标更清晰、代码更可靠、运行更省更快时使用本 SKILL。
 license: MIT
 metadata:
-  version: 1.3.0
+  version: 1.4.0
   targets:
     - deepseek-v4-pro
+    - deepseek-v3
+    - deepseek-r1
     - xiaomi-mimo-v2.5-pro
+    - qwen3-max          # 阿里通义千问
+    - glm-4.6            # 智谱 GLM
+    - kimi-k2            # 月之暗面 Kimi
+    - doubao-pro         # 字节豆包
+    - hunyuan-turbo      # 腾讯混元
+    - ernie-4.5          # 百度文心一言
+    - step-2             # 阶跃星辰
+    - minimax-m2         # MiniMax
+    - spark-4.0          # 讯飞星火
+    - yi-large           # 零一万物
   compatible_hosts:
     - claude-code
     - codex

@@ -10,6 +10,7 @@
 
 ## 目录
 
+- [一键安装（推荐）](#一键安装推荐)
 - [快速开始](#快速开始)
 - [一、Claude Code（推荐）](#一claude-code推荐)
 - [二、Codex（OpenAI Codex CLI / IDE）](#二codexopenai-codex-cli--ide)
@@ -17,12 +18,58 @@
 - [四、Windsurf](#四windsurf)
 - [五、Cline / Roo Code（VS Code 扩展）](#五cline--roo-codevs-code-扩展)
 - [六、通用方式（任意 IDE / CLI）](#六通用方式任意-ide--cli)
+- [支持的模型](#支持的模型)
 - [验证安装](#验证安装)
 - [常见问题](#常见问题)
 
 ---
 
-## 快速开始
+## 一键安装（推荐）
+
+一条命令自动安装到 Claude Code、Codex、Cursor、Windsurf、Cline 等（自动检测并写入对应规则文件）。
+
+### macOS / Linux
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/Hhz0823/DS-MIMO-Optimisation-SKILL/main/install.sh | bash
+```
+
+只装指定目标（例如只装 Claude Code 和 Codex）：
+
+```bash
+TARGETS="claude codex" bash -c "$(curl -fsSL https://raw.githubusercontent.com/Hhz0823/DS-MIMO-Optimisation-SKILL/main/install.sh)"
+```
+
+### Windows（PowerShell）
+
+```powershell
+irm https://raw.githubusercontent.com/Hhz0823/DS-MIMO-Optimisation-SKILL/main/install.ps1 | iex
+```
+
+只装指定目标：
+
+```powershell
+& ([scriptblock]::Create((irm https://raw.githubusercontent.com/Hhz0823/DS-MIMO-Optimisation-SKILL/main/install.ps1))) -Targets "claude,codex"
+```
+
+### 已克隆仓库时
+
+```bash
+# macOS / Linux
+bash install.sh
+```
+```powershell
+# Windows
+powershell -ExecutionPolicy Bypass -File install.ps1
+```
+
+> 脚本做了什么：把 SKILL 文件复制到 Claude Code 的 `~/.claude/skills/`、Codex 的
+> `~/.codex/prompts/` 并向项目 `AGENTS.md` 写引用、为 Cursor 写 `.cursor/rules/*.mdc`、
+> 为 Windsurf 写 `.windsurfrules`、为 Cline 写 `.clinerules`。已存在的引用会跳过，安全幂等。
+
+---
+
+## 快速开始（手动）
 
 ```bash
 # 1. 克隆仓库
@@ -200,6 +247,20 @@ cp DS-MIMO-Optimisation-SKILL/SKILL.md .clinerules
 
 > **原理**：本 SKILL 是模型无关的纯提示词协议。任何能注入指令的宿主都能用——
 > 只要 DeepSeek-V4-Pro / Xiaomi-MiMo-V2.5-Pro 等模型能读到这些 Markdown，即按协议行为。
+
+---
+
+## 支持的模型
+
+本 SKILL 模型无关，已针对性适配众多**国产大模型**，也支持国际模型：
+
+- **主推**：DeepSeek-V4-Pro、Xiaomi-MiMo-V2.5-Pro
+- **国产**：DeepSeek-V3/R1、通义千问 Qwen3、智谱 GLM-4.6、月之暗面 Kimi K2、
+  字节豆包 Doubao、腾讯混元 Hunyuan、百度文心 ERNIE 4.5、阶跃 Step-2、
+  MiniMax M2、讯飞星火 Spark、零一万物 Yi 等
+- **国际**：Claude、GPT、Gemini、Llama 等
+
+完整清单与接入要点见 **[references/supported-models.md](./references/supported-models.md)**。
 
 ---
 
