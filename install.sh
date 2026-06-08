@@ -59,22 +59,34 @@ if echo "$TARGETS" | grep -qw claude; then
   did_any=true
 fi
 
-# ---- 3. Codex（全局 prompts + 项目 AGENTS.md） ----
+# ---- 3. Codex（全局 AGENTS.md + 全局 prompts + 项目 AGENTS.md） ----
 if echo "$TARGETS" | grep -qw codex; then
   DEST="$HOME/.codex/prompts/$SKILL_NAME"
   install_files "$DEST"
-  AGENTS="$PROJECT_DIR/AGENTS.md"
   REF_LINE="遵循 $DEST/SKILL.md 中的 Cognition Booster 认知增强协议及其 references/ 子协议。"
-  if [ -f "$AGENTS" ]; then
-    if ! grep -q "Cognition Booster" "$AGENTS" 2>/dev/null; then
-      printf '\n# Cognition Booster\n%s\n' "$REF_LINE" >> "$AGENTS"
-      c_green "✓ Codex        → 已追加引用到 $AGENTS"
-    else
-      c_yellow "• Codex        → $AGENTS 已包含引用，跳过"
-    fi
+
+  # 3a. 全局 AGENTS.md —— 对所有 Codex 会话生效（全局对话可调用）
+  GLOBAL_AGENTS="$HOME/.codex/AGENTS.md"
+  mkdir -p "$HOME/.codex"
+  if grep -q "Cognition Booster" "$GLOBAL_AGENTS" 2>/dev/null; then
+    c_yellow "• Codex 全局   → $GLOBAL_AGENTS 已含引用，跳过"
   else
-    printf '# 项目 Agent 协议\n\n# Cognition Booster\n%s\n' "$REF_LINE" > "$AGENTS"
-    c_green "✓ Codex        → 已创建 $AGENTS 并写入引用"
+    printf '# Cognition Booster (全局认知增强协议)\n%s\n' "$REF_LINE" >> "$GLOBAL_AGENTS"
+    c_green "✓ Codex 全局   → 已写入 $GLOBAL_AGENTS（所有会话生效）"
+  fi
+
+  # 3b. 项目 AGENTS.md（可选，项目级覆盖/补充）
+  AGENTS="$PROJECT_DIR/AGENTS.md"
+  if [ "$PROJECT_DIR" != "$HOME" ]; then
+    if grep -q "Cognition Booster" "$AGENTS" 2>/dev/null; then
+      c_yellow "• Codex 项目   → $AGENTS 已含引用，跳过"
+    elif [ -f "$AGENTS" ]; then
+      printf '\n# Cognition Booster\n%s\n' "$REF_LINE" >> "$AGENTS"
+      c_green "✓ Codex 项目   → 已追加引用到 $AGENTS"
+    else
+      printf '# 项目 Agent 协议\n\n# Cognition Booster\n%s\n' "$REF_LINE" > "$AGENTS"
+      c_green "✓ Codex 项目   → 已创建 $AGENTS 并写入引用"
+    fi
   fi
   c_green "✓ Codex prompts→ $DEST"
   did_any=true

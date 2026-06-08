@@ -10,7 +10,7 @@ description: >-
   当需要让模型"更听得懂人话"、推理更严谨、目标更清晰、代码更可靠、运行更省更快时使用本 SKILL。
 license: MIT
 metadata:
-  version: 1.5.0
+  version: 1.6.0
   targets:
     - deepseek-v4-pro
     - deepseek-v3

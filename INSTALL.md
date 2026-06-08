@@ -141,9 +141,33 @@ Copy-Item -Recurse DS-MIMO-Optimisation-SKILL "$env:USERPROFILE\.claude\skills\c
 
 ## 二、Codex（OpenAI Codex CLI / IDE）
 
-Codex 通过 `AGENTS.md` 与 prompts 目录加载自定义指令。提供两种方式，**方式 1 最稳。**
+Codex 通过 `AGENTS.md` 与 prompts 目录加载自定义指令。提供三种方式，**方式 0 让全局对话都能调用。**
 
-### 方式 1：AGENTS.md（推荐，最通用）
+### 方式 0：全局调用（推荐，所有会话生效）
+
+Codex 启动时会读取**全局** `~/.codex/AGENTS.md`，对所有项目/会话生效。一键脚本已自动写入；
+手动配置：
+
+```bash
+mkdir -p ~/.codex/prompts
+cp -r DS-MIMO-Optimisation-SKILL ~/.codex/prompts/cognition-booster
+cat >> ~/.codex/AGENTS.md <<'EOF'
+# Cognition Booster (全局认知增强协议)
+遵循 ~/.codex/prompts/cognition-booster/SKILL.md 中的 Cognition Booster 认知增强协议及其 references/ 子协议。
+EOF
+```
+
+```powershell
+# Windows
+New-Item -ItemType Directory -Force "$env:USERPROFILE\.codex\prompts" | Out-Null
+Copy-Item -Recurse DS-MIMO-Optimisation-SKILL "$env:USERPROFILE\.codex\prompts\cognition-booster"
+Add-Content "$env:USERPROFILE\.codex\AGENTS.md" "# Cognition Booster (全局认知增强协议)`n遵循 $env:USERPROFILE\.codex\prompts\cognition-booster\SKILL.md 及其 references/ 子协议。"
+```
+
+> 此后**每一个 Codex 会话**（无论在哪个项目目录）都会加载本 SKILL，无需逐项目配置。
+> 项目级 `AGENTS.md` 仍可叠加，用于覆盖或补充该项目的特定要求。
+
+### 方式 1：项目级 AGENTS.md（按项目）
 
 Codex 会自动读取项目根目录的 `AGENTS.md` 作为 agent 指令。
 

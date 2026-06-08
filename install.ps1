@@ -64,16 +64,30 @@ if ($TargetList -contains "claude") {
 if ($TargetList -contains "codex") {
   $dest = "$env:USERPROFILE\.codex\prompts\$SkillName"
   Install-Files $dest
-  $agents = Join-Path $ProjectDir "AGENTS.md"
   $refLine = "遵循 $dest\SKILL.md 中的 Cognition Booster 认知增强协议及其 references/ 子协议。"
-  if (Test-Path $agents) {
-    if (-not (Select-String -Path $agents -Pattern "Cognition Booster" -Quiet)) {
-      Add-Content $agents "`n# Cognition Booster`n$refLine"
-      Ok "Codex        -> 已追加引用到 $agents"
-    } else { Warn "Codex        -> $agents 已包含引用，跳过" }
+
+  # 3a. 全局 AGENTS.md —— 对所有 Codex 会话生效（全局对话可调用）
+  $globalAgents = "$env:USERPROFILE\.codex\AGENTS.md"
+  New-Item -ItemType Directory -Force -Path "$env:USERPROFILE\.codex" | Out-Null
+  if ((Test-Path $globalAgents) -and (Select-String -Path $globalAgents -Pattern "Cognition Booster" -Quiet)) {
+    Warn "Codex 全局   -> $globalAgents 已含引用，跳过"
   } else {
-    Set-Content $agents "# 项目 Agent 协议`n`n# Cognition Booster`n$refLine"
-    Ok "Codex        -> 已创建 $agents 并写入引用"
+    Add-Content $globalAgents "# Cognition Booster (全局认知增强协议)`n$refLine"
+    Ok "Codex 全局   -> 已写入 $globalAgents（所有会话生效）"
+  }
+
+  # 3b. 项目 AGENTS.md（可选）
+  $agents = Join-Path $ProjectDir "AGENTS.md"
+  if ($ProjectDir -ne $env:USERPROFILE) {
+    if ((Test-Path $agents) -and (Select-String -Path $agents -Pattern "Cognition Booster" -Quiet)) {
+      Warn "Codex 项目   -> $agents 已含引用，跳过"
+    } elseif (Test-Path $agents) {
+      Add-Content $agents "`n# Cognition Booster`n$refLine"
+      Ok "Codex 项目   -> 已追加引用到 $agents"
+    } else {
+      Set-Content $agents "# 项目 Agent 协议`n`n# Cognition Booster`n$refLine"
+      Ok "Codex 项目   -> 已创建 $agents 并写入引用"
+    }
   }
   Ok "Codex prompts-> $dest"
   $DidAny = $true
