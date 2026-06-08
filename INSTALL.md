@@ -89,6 +89,7 @@ DS-MIMO-Optimisation-SKILL/
 ├── LICENSE
 └── references/
     ├── dialogue-optimization.md      # 对话与表达优化 + 对话深度理解
+    ├── dialogue-association.md       # 对话联想与补全（找主语/补内容/联想要求）
     ├── chinese-comprehension.md      # 中文深度理解（倒装/成语/省略/网络语）
     ├── goal-setting.md               # 目标化制定
     ├── reasoning-optimization.md     # 推理与思考优化（多元/逻辑/深度）
