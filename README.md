@@ -1,4 +1,6 @@
-<!-- Language: **English** | [简体中文](./README.zh.md) | [日本語](./README.ja.md) -->
+**English** · [简体中文](./README.zh.md) · [日本語](./README.ja.md)
+
+---
 
 # Cognition Booster — Enhanced Cognition & Dialogue Optimization SKILL
 

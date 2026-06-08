@@ -1,4 +1,6 @@
-<!-- 语言: [English](./README.md) | **简体中文** | [日本語](./README.ja.md) -->
+[English](./README.md) · **简体中文** · [日本語](./README.ja.md)
+
+---
 
 # Cognition Booster — 增强型认知与对话优化 SKILL
 
