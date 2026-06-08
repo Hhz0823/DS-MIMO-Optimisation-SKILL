@@ -33,11 +33,11 @@ Claude Code 从以下位置发现 skills（任选其一）：
 
 安装步骤：
 
-1. 把 `skill-1` 文件夹复制到上述目录，并重命名为 `cognition-booster`：
+1. 把 `skill` 文件夹复制到上述目录，并重命名为 `cognition-booster`：
 
    Windows（bash）：
    ```bash
-   cp -r "C:/Users/Koromi的天选/Desktop/skill-1" "C:/Users/Koromi的天选/.claude/skills/cognition-booster"
+   cp -r "C:/Users/<你的用户名>/Desktop/skill" "C:/Users/<你的用户名>/.claude/skills/cognition-booster"
    ```
 
 2. 确认结构为 `~/.claude/skills/cognition-booster/SKILL.md`。
